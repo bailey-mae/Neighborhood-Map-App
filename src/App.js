@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
+import SideBar from './sidebar.js';
 
 class App extends Component {
 
@@ -81,6 +82,13 @@ class App extends Component {
     return (
       <main>
       <div id="map"></div>
+      <div id="App">
+      <SideBar />
+      <div id="page-wrap">
+        <h1>AppDividend</h1>
+        <h2>Check out our tutorials the side menubar</h2>
+      </div>
+    </div>
       </main>
     )
   }
@@ -99,4 +107,7 @@ function loadScript (url) {
 }
 
 export default App;
+
+
+
 
