@@ -1,34 +1,54 @@
 //sidebar.js
 
 import React from 'react';
-import { slide as Menu } from 'react-burger-menu';
+import _ from 'lodash';
 
-export default props => {
-  return (
-    <Menu>
-      <a className="menu-item" href="/">
-        Home
-      </a>
 
-      <a className="menu-item" href="/laravel">
-        Laravel
-      </a>
+export default class SideBar extends React.Component {
 
-      <a className="menu-item" href="/angular">
-        Angular
-      </a>
 
-      <a className="menu-item" href="/react">
-        React
-      </a>
 
-      <a className="menu-item" href="/vue">
-        Vue
-      </a>
+ filterTodo(e)
+  {
+     var updatedList = this.props.venues;
+    updatedList = updatedList.filter((item =>{
+      return item.toLowerCase().search(
+        e.target.value.toLowerCase()) !== -1;
+    }) );
+       this.setState({
+      todos: updatedList,
+    });
+    if (updatedList == 0 ) {
+      this.setState({
+      message: true,
+    });
+    } else {
+      this.setState({
+      message: false,
+    });
+}}
 
-      <a className="menu-item" href="/node">
-        Node
-      </a>
-    </Menu>
+  render(){
+  let venues = this.props.venues.map((venue) =>
+    venue.venue);
+
+    venues =_.sortBy(venues, ['name']);
+
+  const listItems = venues.map((venue) =>
+    <li key={venue.id}>{venue.name}</li>
   );
-};
+  return (
+    <div>
+    <ul>{listItems}</ul>
+     <input type="text"
+        placeholder="Filter here..."
+        onChange={this.filterTodo}
+      />
+    </div>
+  );
+  }
+}
+
+
+
+

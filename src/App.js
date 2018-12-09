@@ -83,7 +83,7 @@ class App extends Component {
       <main>
       <div id="map"></div>
       <div id="App">
-      <SideBar />
+      <SideBar venues={this.state.venues}></SideBar>
       <div id="page-wrap">
         <h1>Sushi in Frederick</h1>
         <h2>Go Fishing in the side menubar</h2>
