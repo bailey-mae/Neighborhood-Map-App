@@ -85,8 +85,8 @@ class App extends Component {
       <div id="App">
       <SideBar />
       <div id="page-wrap">
-        <h1>AppDividend</h1>
-        <h2>Check out our tutorials the side menubar</h2>
+        <h1>Sushi in Frederick</h1>
+        <h2>Go Fishing in the side menubar</h2>
       </div>
     </div>
       </main>
