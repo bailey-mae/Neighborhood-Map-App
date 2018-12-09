@@ -4,6 +4,10 @@ import axios from 'axios';
 
 class App extends Component {
 
+  state = {
+    venues: []
+  }
+
   componentDidMount() {
     this.renderMap ()
     this.getVenues ()
@@ -19,14 +23,16 @@ class App extends Component {
     const parameters = {
       client_id: "1FSWOD3MHOO1XYMP5ESSXGDRJHEWMD3QMZWQIWYMA0G433C5",
       client_secret: "FIJNBNPGLBMLRL0HY52UVXUIQF2KOHISCKOUVXB4OLFCH3JJ",
-      query: "food",
+      query: "sushi",
       near: "Frederick",
       v: "20182507"
     }
 
     axios.get(endPoint + new URLSearchParams(parameters))
       .then(response => {
-        console.log(response.data.response.groups[0].items)
+        this.setState({
+          venues: response.data.response.groups[0].items
+        })
       })
       .catch(error => {
         console.log("So sorry, the following error occured " + error)
