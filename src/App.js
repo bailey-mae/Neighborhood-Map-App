@@ -9,7 +9,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.renderMap ()
     this.getVenues ()
   }
 
@@ -32,7 +31,7 @@ class App extends Component {
       .then(response => {
         this.setState({
           venues: response.data.response.groups[0].items
-        })
+        }, this.renderMap())
       })
       .catch(error => {
         console.log("So sorry, the following error occured " + error)
@@ -45,6 +44,22 @@ class App extends Component {
             center: {lat: 39.4219709802915, lng: -77.4121168197085},
             zoom: 13
           });
+
+          this.state.venues.map(markVenue => {
+
+            var contentString = '${markVenue.venue.name}'
+
+            var infowindow = new window.google.maps.InfoWindow({
+              content: contentString
+            });
+
+            var marker = new window.google.maps.Marker({
+              position: {lat: markVenue.venue.location.lat, lng: markVenue.venue.location.lng},
+              map: map,
+            });
+
+          })
+
   }
 
 
