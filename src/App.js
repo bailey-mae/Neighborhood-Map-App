@@ -12,11 +12,13 @@ class App extends Component {
     this.getVenues ()
   }
 
+//render map with google api
   renderMap = () => {
     loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAGlDDI4IhHVNMooY1WCGtTb6TSGmRnv9Q&callback=initMap")
     window.initMap = this.initMap
   }
 
+//foursqaure api to get sushi places in Frederick, MD
   getVenues = () => {
     const endPoint = "https://api.foursquare.com/v2/venues/explore?"
     const parameters = {
@@ -27,6 +29,7 @@ class App extends Component {
       v: "20182507"
     }
 
+//axios for xmlhttp requests and error handling
     axios.get(endPoint + new URLSearchParams(parameters))
       .then(response => {
         this.setState({
@@ -39,6 +42,7 @@ class App extends Component {
       })
   }
 
+//initialize map with markers and info windows
   initMap = () => {
           const map = new window.google.maps.Map(document.getElementById('map'), {
             center: {lat: 39.4219709802915, lng: -77.4121168197085},
@@ -47,15 +51,22 @@ class App extends Component {
 
           this.state.venues.map(markVenue => {
 
-            var contentString = '${markVenue.venue.name}'
+            var contentString = `${markVenue.venue.name}`
 
+            //create info window
             var infowindow = new window.google.maps.InfoWindow({
               content: contentString
             });
 
+            //create marker
             var marker = new window.google.maps.Marker({
               position: {lat: markVenue.venue.location.lat, lng: markVenue.venue.location.lng},
               map: map,
+            });
+
+            // open info window on click of marker
+            marker.addListener('click', function() {
+              infowindow.open(map, marker);
             });
 
           })
@@ -72,8 +83,7 @@ class App extends Component {
   }
 }
 
-
-
+//vanilla javascript for google api request
 function loadScript (url) {
   var index =
     window.document.getElementsByTagName("script")
