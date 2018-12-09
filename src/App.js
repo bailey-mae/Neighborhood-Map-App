@@ -52,6 +52,7 @@ class App extends Component {
           //create info window
           var infowindow = new window.google.maps.InfoWindow()
 
+          //display markers on map
           this.state.venues.map(markVenue => {
 
             var contentString = `${markVenue.venue.name}`
@@ -62,10 +63,14 @@ class App extends Component {
               map: map,
             });
 
-            // open info window on click of marker
+            // click marker event listener
             marker.addListener('click', function() {
-              infowindow.open(map, marker);
-            });
+
+              //content of infowindow
+              infowindow.setContent(contentString)
+              //open and infowindow
+              infowindow.open(map, marker)
+            })
 
           })
 
