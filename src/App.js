@@ -49,14 +49,12 @@ class App extends Component {
             zoom: 13
           });
 
+          //create info window
+          var infowindow = new window.google.maps.InfoWindow()
+
           this.state.venues.map(markVenue => {
 
             var contentString = `${markVenue.venue.name}`
-
-            //create info window
-            var infowindow = new window.google.maps.InfoWindow({
-              content: contentString
-            });
 
             //create marker
             var marker = new window.google.maps.Marker({
