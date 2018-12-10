@@ -2,37 +2,27 @@
 
 import React from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
+class SideBar extends React.Component {
 
-export default class SideBar extends React.Component {
+static propTypes = {
+  venues: PropTypes.array,
+  filterVenues : PropTypes.func,
+}
 
+  constructor(props) {
+    super(props);
+  }
 
-
- filterTodo(e)
-  {
-     var updatedList = this.props.venues;
-    updatedList = updatedList.filter((item =>{
-      return item.toLowerCase().search(
-        e.target.value.toLowerCase()) !== -1;
-    }) );
-       this.setState({
-      todos: updatedList,
-    });
-    if (updatedList == 0 ) {
-      this.setState({
-      message: true,
-    });
-    } else {
-      this.setState({
-      message: false,
-    });
-}}
+  filterVenues = (evt) => {
+    evt.preventDefault();
+    this.props.filterVenues(evt.target.value);
+  }
 
   render(){
-  let venues = this.props.venues.map((venue) =>
-    venue.venue);
 
-    venues =_.sortBy(venues, ['name']);
+    let venues =_.sortBy(this.props.venues, ['name']);
 
   const listItems = venues.map((venue) =>
     <li key={venue.id}>{venue.name}</li>
@@ -40,9 +30,9 @@ export default class SideBar extends React.Component {
   return (
     <div>
     <ul>{listItems}</ul>
-     <input type="text"
+    <input type="text"
         placeholder="Filter here..."
-        onChange={this.filterTodo}
+        onChange={this.filterVenues}
       />
     </div>
   );
@@ -50,5 +40,5 @@ export default class SideBar extends React.Component {
 }
 
 
-
+export default SideBar;
 

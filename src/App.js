@@ -5,8 +5,14 @@ import SideBar from './sidebar.js';
 
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+    this.filterVenues = this.filterVenues.bind(this)
+  }
+
   state = {
-    venues: []
+    venues: [],
+    filteredVenueIds: []
   }
 
   componentDidMount() {
@@ -33,8 +39,10 @@ class App extends Component {
 //axios for xmlhttp requests and error handling
     axios.get(endPoint + new URLSearchParams(parameters))
       .then(response => {
+        let venues = response.data.response.groups[0].items.map(item => item.venue)
         this.setState({
-          venues: response.data.response.groups[0].items
+          venues,
+          filteredVenueIds : venues.map (item => item.id)
         }, this.renderMap())
       })
       .catch(error => {
@@ -42,9 +50,22 @@ class App extends Component {
 
       })
   }
+//filter venues
+     filterVenues = (query) => {
+      let filteredVenueIds;
+      if (!query) {
+        filteredVenueIds = this.state.venues.map (item => item.id)
+      } else {
+          filteredVenueIds = this.state.venues.filter (item => {
+            return item.name.toLowerCase ().indexOf(query.toLowerCase())  >= 0;
+          }) .map(item => item.id);
+        }
+        this.setState({filteredVenueIds}, this.initMap);
+     }
 
 //initialize map with markers and info windows
   initMap = () => {
+          let venues = this.getFilteredVenues()
           const map = new window.google.maps.Map(document.getElementById('map'), {
             center: {lat: 39.4219709802915, lng: -77.4121168197085},
             zoom: 13
@@ -52,16 +73,19 @@ class App extends Component {
 
           //create info window
           var infowindow = new window.google.maps.InfoWindow()
-
           //display markers on map
-          this.state.venues.map(markVenue => {
+          venues.map(markVenue => {
 
-            var contentString = `${markVenue.venue.name}`
+            var contentString = `${markVenue.name}`
 
             //create marker
             var marker = new window.google.maps.Marker({
-              position: {lat: markVenue.venue.location.lat, lng: markVenue.venue.location.lng},
+              position: {lat: markVenue.location.lat, lng: markVenue.location.lng},
               map: map,
+              venue: markVenue,
+              id: markVenue.id,
+              name: markVenue.name,
+              animation: window.google.maps.Animation.DROP
             });
 
             // click marker event listener
@@ -71,24 +95,22 @@ class App extends Component {
               infowindow.setContent(contentString)
               //open and infowindow
               infowindow.open(map, marker)
-            })
+            });
 
-          })
+          });
 
   }
 
+getFilteredVenues = () => this.state.venues.filter(venue => this.state.filteredVenueIds.includes(venue.id))
 
   render () {
+    let venues = this.getFilteredVenues()
     return (
-      <main>
+      <main id="container">
       <div id="map"></div>
       <div id="App">
-      <SideBar venues={this.state.venues}></SideBar>
-      <div id="page-wrap">
-        <h1>Sushi in Frederick</h1>
-        <h2>Go Fishing in the side menubar</h2>
+      <SideBar venues={venues} filterVenues={this.filterVenues}/>
       </div>
-    </div>
       </main>
     )
   }
@@ -97,8 +119,7 @@ class App extends Component {
 //vanilla javascript for google api request
 function loadScript (url) {
   var index =
-    window.document.getElementsByTagName("script")
-    [0]
+    window.document.getElementsByTagName("script")[0]
   var script = window.document.createElement("script")
   script.src = url
   script.async = true
