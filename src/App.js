@@ -73,6 +73,13 @@ class App extends Component {
 
           //create info window
           var infowindow = new window.google.maps.InfoWindow()
+
+          var markerIcon = {
+  url: 'https://image.flaticon.com/icons/png/128/786/786903.png',
+  scaledSize: new window.google.maps.Size(60, 60),
+  origin: new window.google.maps.Point(0, 0), // used if icon is a part of sprite, indicates image position in sprite
+  anchor: new window.google.maps.Point(20,40) // lets offset the marker image
+};
           //display markers on map
           venues.map(markVenue => {
 
@@ -85,7 +92,8 @@ class App extends Component {
               venue: markVenue,
               id: markVenue.id,
               name: markVenue.name,
-              animation: window.google.maps.Animation.DROP
+              animation: window.google.maps.Animation.DROP,
+              icon: markerIcon
             });
 
             // click marker event listener
