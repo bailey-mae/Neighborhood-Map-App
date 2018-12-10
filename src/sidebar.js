@@ -15,17 +15,25 @@ static propTypes = {
     super(props);
   }
 
+
   filterVenues = (evt) => {
     evt.preventDefault();
     this.props.filterVenues(evt.target.value);
   }
 
+
   render(){
 
     let venues =_.sortBy(this.props.venues, ['name']);
 
-  const listItems = venues.map((venue) =>
-    <li key={venue.id}>{venue.name}</li>
+
+
+  let listItems = venues.map((venue) =>
+    <li key={venue.id} role="button" className="box" tabIndex="0"
+    onClick={() => {
+                this.openMarker(this.venue.props.markVenue.name);
+              }}> {venue.name}
+    </li>
   );
   return (
     <div>
@@ -38,7 +46,9 @@ static propTypes = {
     </div>
   );
   }
+
 }
+
 
 
 export default SideBar;

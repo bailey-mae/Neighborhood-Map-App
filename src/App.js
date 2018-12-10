@@ -59,6 +59,7 @@ class App extends Component {
           filteredVenueIds = this.state.venues.filter (item => {
             return item.name.toLowerCase ().indexOf(query.toLowerCase())  >= 0;
           }) .map(item => item.id);
+
         }
         this.setState({filteredVenueIds}, this.initMap);
      }
@@ -101,7 +102,7 @@ class App extends Component {
 
               //content of infowindow
               infowindow.setContent(contentString)
-              //open and infowindow
+              //open an infowindow
               infowindow.open(map, marker)
             });
 
@@ -110,6 +111,8 @@ class App extends Component {
   }
 
 getFilteredVenues = () => this.state.venues.filter(venue => this.state.filteredVenueIds.includes(venue.id))
+
+
 
   render () {
     let venues = this.getFilteredVenues()
