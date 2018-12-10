@@ -68,7 +68,7 @@ class App extends Component {
           let venues = this.getFilteredVenues()
           const map = new window.google.maps.Map(document.getElementById('map'), {
             center: {lat: 39.4219709802915, lng: -77.4121168197085},
-            zoom: 13
+            zoom: 12
           });
 
           //create info window
@@ -109,7 +109,8 @@ getFilteredVenues = () => this.state.venues.filter(venue => this.state.filteredV
       <main id="container">
       <div id="map"></div>
       <div id="App">
-      <SideBar venues={venues} filterVenues={this.filterVenues}/>
+      <SideBar venues={venues} filterVenues={this.filterVenues}>
+      </SideBar>
       </div>
       </main>
     )

@@ -29,11 +29,12 @@ static propTypes = {
   );
   return (
     <div>
-    <ul>{listItems}</ul>
+    <h2>Sushi Frederick</h2>
     <input type="text"
-        placeholder="Filter here..."
+        placeholder="Go Fishing..."
         onChange={this.filterVenues}
       />
+      <ul>{listItems}</ul>
     </div>
   );
   }

@@ -13,19 +13,35 @@ body {
 
 #container {
   font-family: sans-serif;
-  height: 100vh;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row-reverse wrap;
+  background-color: #180335;
+
 
 }
 
 #map {
   height: 100vh;
   width: 75%;
+  flex: 200px;
 }
 
-#SideBar {
-  width: 25%;
+
+#App {
+  height: 100vh;
+  color: #ffffff;
 }
 
-list-style: none
+ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+li {
+  padding: .5em;
+  font-size: 1em;
+}
+
+/*media queries */
+/* ====================== Media Queries ====================== */
+
