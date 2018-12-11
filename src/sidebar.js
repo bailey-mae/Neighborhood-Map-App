@@ -38,11 +38,15 @@ state = {
   );
   return (
     <div>
+    <div id="Title" aria-label="title">
     <h2>Sushi Frederick</h2>
+    </div>
+    <div id ="Search" aria-label="Search" >
     <input type="text"
         placeholder="Go Fishing..."
         onChange={this.filterVenues}
       />
+      </div>
       <ul>{listItems}</ul>
     </div>
   );

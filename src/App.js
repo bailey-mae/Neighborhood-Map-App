@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import SideBar from './sidebar.js';
+import ErrorBoundary from './errorBoundary';
 
 class App extends Component {
 
@@ -47,7 +48,8 @@ class App extends Component {
         }, this.renderMap())
       })
       .catch(error => {
-        console.log("So sorry, the following error occured " + error)
+        alert(`Sorry, fetching data from Foursquare was not possible!`)
+        console.log("So sorry, the following FourSquare error occured " + error)
 
       })
   }
@@ -86,7 +88,7 @@ class App extends Component {
           //display markers on map
           venues.map(markVenue => {
 
-            var contentString = `${markVenue.name + `<br>` + markVenue.location.address}`
+            var contentString = `${markVenue.name + `<br>` + markVenue.location.address + `<br>` + `<i>data provided by Foursquare`}`
 
             //create marker
             var marker = new window.google.maps.Marker({
@@ -119,20 +121,27 @@ getFilteredVenues = () => this.state.venues.filter(venue => this.state.filteredV
     this.setState({ venues: this.state.venues });
   }
 
+
   render () {
-    let venues = this.getFilteredVenues()
+  let venues = this.getFilteredVenues()
+  if (this.state.hasError) {
+    return <div id="Error-message" aria-label="Error message">Sorry, something went wrong!</div>
+    } else {
     return (
       <main id="container">
-      <div id="map"></div>
-      <div id="App">
-      <SideBar venues={venues} filterVenues={this.filterVenues}
-        OnClickText={this.toggleMarkerLocation, console.log("boo")}>
-      </SideBar>
-      </div>
+        <ErrorBoundary>
+
+        <div id="App" aria-label="App">
+          <SideBar venues={venues} filterVenues={this.filterVenues}
+           OnClickText={this.toggleMarkerLocation, console.log("boo")}>
+          </SideBar>
+        </div>
+        <div id="map" aria-label="map" role="application"></div>
+      </ErrorBoundary>
       </main>
     )
   }
-}
+}}
 
 //vanilla javascript for google api request
 function loadScript (url) {
