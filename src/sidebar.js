@@ -21,6 +21,10 @@ static propTypes = {
     this.props.filterVenues(evt.target.value);
   }
 
+state = {
+    selectedItem: null
+  }
+
 
   render(){
 
@@ -29,10 +33,7 @@ static propTypes = {
 
 
   let listItems = venues.map((venue) =>
-    <li key={venue.id} role="button" className="box" tabIndex="0"
-    onClick={() => {
-                this.openMarker(this.venue.props.markVenue.name);
-              }}> {venue.name}
+    <li key={venue.id} role="button" className="box" tabIndex="0"> {venue.name}
     </li>
   );
   return (

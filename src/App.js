@@ -19,6 +19,7 @@ class App extends Component {
     this.getVenues ()
   }
 
+
 //render map with google api
   renderMap = () => {
     loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAGlDDI4IhHVNMooY1WCGtTb6TSGmRnv9Q&callback=initMap")
@@ -68,12 +69,13 @@ class App extends Component {
   initMap = () => {
           let venues = this.getFilteredVenues()
           const map = new window.google.maps.Map(document.getElementById('map'), {
-            center: {lat: 39.4219709802915, lng: -77.4121168197085},
+            center: {lat: 39.40840019, lng: -77.45889666},
             zoom: 12
           });
 
           //create info window
           var infowindow = new window.google.maps.InfoWindow()
+
 
           var markerIcon = {
   url: 'https://image.flaticon.com/icons/png/128/786/786903.png',
@@ -84,7 +86,7 @@ class App extends Component {
           //display markers on map
           venues.map(markVenue => {
 
-            var contentString = `${markVenue.name}`
+            var contentString = `${markVenue.name + `<br>` + markVenue.location.address}`
 
             //create marker
             var marker = new window.google.maps.Marker({
@@ -112,7 +114,10 @@ class App extends Component {
 
 getFilteredVenues = () => this.state.venues.filter(venue => this.state.filteredVenueIds.includes(venue.id))
 
-
+ toggleMarkerLocation = (venue) => {
+    window.location.isMarkerShown = !window.location.isMarkerShown
+    this.setState({ venues: this.state.venues });
+  }
 
   render () {
     let venues = this.getFilteredVenues()
@@ -120,7 +125,8 @@ getFilteredVenues = () => this.state.venues.filter(venue => this.state.filteredV
       <main id="container">
       <div id="map"></div>
       <div id="App">
-      <SideBar venues={venues} filterVenues={this.filterVenues}>
+      <SideBar venues={venues} filterVenues={this.filterVenues}
+        OnClickText={this.toggleMarkerLocation, console.log("boo")}>
       </SideBar>
       </div>
       </main>
