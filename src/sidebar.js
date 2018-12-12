@@ -30,12 +30,11 @@ state = {
 
     let venues =_.sortBy(this.props.venues, ['name']);
 
-
-
-  let listItems = venues.map((venue) =>
-    <li key={venue.id} role="button" className="box" tabIndex="0"> {venue.name}
+    let listItems = venues.map((venue) =>
+    <li key={venue.id} role="button" className="box" tabIndex="0" onClick ={() => this.props.onClickText(venue)}> {venue.name}
     </li>
-  );
+    );
+
   return (
     <div>
     <div id="Title" aria-label="title">
@@ -47,7 +46,8 @@ state = {
         onChange={this.filterVenues}
       />
       </div>
-      <ul>{listItems}</ul>
+      <ul className='location-list' role='tablist'> {listItems}
+      </ul>
     </div>
   );
   }

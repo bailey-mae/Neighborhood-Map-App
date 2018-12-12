@@ -1,44 +1,67 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Udacity FEND Degree Program
+---
+### Neighborhood Map Project
 
-In the project directory, you can run:
+# Table of Contents
 
-### `npm start`
+* [Project Overview](#overview)
+* [Specification](#specification)
+* [Running the project](#how-to-run-the-project)
+* [Resources](#resources)
+* [Create React App](#create-react-app)
+* [APIs Used](#apis-used)
+* [Contributing](#contributing)
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Project Overview:
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+For the **Neighborhood Map Project** I built a single page application featuring a map of sushi restaurant locations in Frederick, MD, the city where I live. I added functionality to this map including info windows, custom markers, a side bar list of the restaurants and search filtering of the restaurant list with associated markers filtered synchrnously on the map.
 
-### `npm test`
+##Specification
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The goal of this project was to build a single page map application using React & Google Maps API, plus to integrate a third-party data API, in this case Foursquare, and make the app accessible and usable offline.
 
-### `npm run build`
+![Neighborhood Map Screenshot]()
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Running the Project:
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+To run the project in the **development mode**, follow the instructions below:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Download or clone the repository in your computer:
+```
+$ git clone https://github.com/bailey-mae/neighborhood-map-app.git
+```
 
-### `npm run eject`
+In the repository folder:
+* install project dependencies with
+```
+npm install axios --save
+npm install escape-string-regexp --save
+```
+* start the development server with
+```
+npm start
+```
+* open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Resources:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Project information can be found at [Udacity](https://www.udacity.com/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Most of the code in this project has been written to the ES6 JavaScript specification for compatibility with modern web browsers and future proofing JavaScript code.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Additional Source Material referenced in completing this project
+[Sherman, Paul <em>A Simple React Router v4 Tutorial</em> Medium.com](https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf)<br></br>
+[Maeva <em>Study Jam 21/07 - FEND P7 - My Reads</em>](https://youtu.be/i6L2jLHV9j8)
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Create React App
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+
+## Contributing
+
+This repository was created as an assignment for the Udacity FEND degree and represents coursework, because of this pull requests will most likely not be accepted.
+
+For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).

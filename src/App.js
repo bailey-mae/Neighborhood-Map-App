@@ -38,7 +38,7 @@ class App extends Component {
       v: "20182507"
     }
 
-//axios for xmlhttp requests and error handling
+//axios for xmlhttp requests and error handling - similar to fetch - handles async request between Foursquare and application
     axios.get(endPoint + new URLSearchParams(parameters))
       .then(response => {
         let venues = response.data.response.groups[0].items.map(item => item.venue)
@@ -64,36 +64,55 @@ class App extends Component {
           }) .map(item => item.id);
 
         }
-        this.setState({filteredVenueIds}, this.initMap);
+        this.setState({filteredVenueIds}, this.drawMarkers);
      }
 
 //initialize map with markers and info windows
   initMap = () => {
-          let venues = this.getFilteredVenues()
-          const map = new window.google.maps.Map(document.getElementById('map'), {
+
+          this.map = new window.google.maps.Map(document.getElementById('map'), {
             center: {lat: 39.40840019, lng: -77.45889666},
             zoom: 12
           });
 
-          //create info window
-          var infowindow = new window.google.maps.InfoWindow()
+          this.drawMarkers();
 
 
+  }
+
+drawMarkers = () => {
+  if (this.state.markers) {
+    //clears drawn markers from map before drawing new ones
+    this.state.markers.forEach((marker) => {
+      marker.setMap(null);
+    })
+  }
+  let venues = this.getFilteredVenues()
+  console.log(venues)
+  //display markers on map
+          let markers = venues.map(markVenue => {
+
+            return this.createMarker(markVenue);
+
+
+          });
+//saving markers in state
+this.setState({markers : markers})
+
+}
+
+createMarker = (markVenue) => {
+   //sets custom marker icon
           var markerIcon = {
-  url: 'https://image.flaticon.com/icons/png/128/786/786903.png',
-  scaledSize: new window.google.maps.Size(60, 60),
-  origin: new window.google.maps.Point(0, 0), // used if icon is a part of sprite, indicates image position in sprite
-  anchor: new window.google.maps.Point(20,40) // lets offset the marker image
-};
-          //display markers on map
-          venues.map(markVenue => {
+            url: 'https://image.flaticon.com/icons/png/128/786/786903.png',
+            scaledSize: new window.google.maps.Size(60, 60),
+            origin: new window.google.maps.Point(0, 0), // used if icon is a part of sprite, indicates image position in sprite
+            anchor: new window.google.maps.Point(20,40) // lets offset the marker image
+          };
 
-            var contentString = `${markVenue.name + `<br>` + markVenue.location.address + `<br>` + `<i>data provided by Foursquare`}`
-
-            //create marker
-            var marker = new window.google.maps.Marker({
+      const marker= new window.google.maps.Marker({
               position: {lat: markVenue.location.lat, lng: markVenue.location.lng},
-              map: map,
+              map: this.map,
               venue: markVenue,
               id: markVenue.id,
               name: markVenue.name,
@@ -101,25 +120,37 @@ class App extends Component {
               icon: markerIcon
             });
 
+      const self = this
             // click marker event listener
             marker.addListener('click', function() {
+              self.drawMarker(markVenue, marker)
+
+            });
+            return marker
+}
+//todo: change to drawInfowindow
+drawMarker = (markVenue, marker) => {
+      if (this.state.activeMarker)this.state.activeMarker.close();
+
+      //create info window
+      var infowindow = new window.google.maps.InfoWindow()
+
+      if (!marker) marker=this.createMarker(markVenue);
+      const contentString = `${markVenue.name + `<br>` + markVenue.location.address + `<br>` + `<i>data provided by Foursquare`}`
 
               //content of infowindow
               infowindow.setContent(contentString)
               //open an infowindow
-              infowindow.open(map, marker)
-            });
+              infowindow.open(this.map, marker)
+              // persist state of drawn marker in component
+              this.setState({activeMarker:infowindow})
 
-          });
 
-  }
+}
 
 getFilteredVenues = () => this.state.venues.filter(venue => this.state.filteredVenueIds.includes(venue.id))
 
- toggleMarkerLocation = (venue) => {
-    window.location.isMarkerShown = !window.location.isMarkerShown
-    this.setState({ venues: this.state.venues });
-  }
+
 
 
   render () {
@@ -133,7 +164,7 @@ getFilteredVenues = () => this.state.venues.filter(venue => this.state.filteredV
 
         <div id="App" aria-label="App">
           <SideBar venues={venues} filterVenues={this.filterVenues}
-           OnClickText={this.toggleMarkerLocation, console.log("boo")}>
+           onClickText={this.drawMarker}>
           </SideBar>
         </div>
         <div id="map" aria-label="map" role="application"></div>
