@@ -29,6 +29,7 @@ body {
 
 #App {
   height: 100vh;
+  width: 30vh;
   color: #ffffff;
   padding-top: 1em;
   padding-left: 1em;
@@ -48,4 +49,18 @@ li {
 
 /*media queries */
 /* ====================== Media Queries ====================== */
+
+@media screen and (max-width: 600px){
+#container {
+   -webkit-flex-direction: row;
+    flex-direction: row;
+  }
+
+  #map {
+  -webkit-order: -1;
+   order: -1;
+  }
+
+}
+
 

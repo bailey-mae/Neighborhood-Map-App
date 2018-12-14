@@ -11,9 +11,9 @@ static propTypes = {
   filterVenues : PropTypes.func,
 }
 
-  constructor(props) {
+ /* constructor(props) {
     super(props);
-  }
+  }*/
 
 
   filterVenues = (evt) => {
