@@ -22,7 +22,7 @@ For the **Neighborhood Map Project** I built a single page application featuring
 
 The goal of this project was to build a single page map application using React & Google Maps API, plus to integrate a third-party data API, in this case Foursquare, and make the app accessible and usable offline.
 
-![Neighborhood Map Screenshot]('./mapscreenshot.jpg')
+![Neighborhood Map Screenshot](mapscreenshot.jpg)
 
 ## Running the Project:
 
