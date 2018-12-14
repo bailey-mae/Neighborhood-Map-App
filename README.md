@@ -8,8 +8,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 * [Project Overview](#overview)
 * [Specification](#specification)
-* [Running the project](#how-to-run-the-project)
-* [Offline Use](#service-worker)
+* [Running the project](#running-the-project)
+* [Offline Use](#offline-use)
 * [Resources](#resources)
 * [Create React App](#create-react-app)
 * [APIs Used](#apis-used)
