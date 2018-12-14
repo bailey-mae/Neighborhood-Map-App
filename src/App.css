@@ -47,6 +47,10 @@ li {
   font-size: 1em;
 }
 
+label {
+  font-size: .75em;
+  color: #41caff;
+}
 /*media queries */
 /* ====================== Media Queries ====================== */
 

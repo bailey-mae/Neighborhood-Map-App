@@ -41,7 +41,8 @@ state = {
     <h2>Sushi Frederick</h2>
     </div>
     <div id ="Search" aria-label="Search" >
-    <input type="text"
+    <label htmlFor = "filter">Filter </label>
+    <input type="text" name="filter" id="filter"
         placeholder="Go Fishing..."
         onChange={this.filterVenues}
       />

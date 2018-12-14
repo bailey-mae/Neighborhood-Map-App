@@ -9,6 +9,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 * [Project Overview](#overview)
 * [Specification](#specification)
 * [Running the project](#how-to-run-the-project)
+* [Offline Use](#service-worker)
 * [Resources](#resources)
 * [Create React App](#create-react-app)
 * [APIs Used](#apis-used)
@@ -42,6 +43,13 @@ npm install
 npm start
 ```
 * open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## Offline Use:
+By default, the create-react-app includes a service worker in the production build.
+
+Production Mode: create a production build with npm run build, which can then be run by pointing a web server at the build directory (for example, serve -s build) and opening it in a browser.
+
+Please note, the offline functionality of the app is only available in Production Mode. This caches the app boilerplate using the service worker provided with Create React App. The API data and map data are only available with a network connection.
 
 ## Resources:
 

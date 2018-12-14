@@ -4,6 +4,8 @@ import axios from 'axios';
 import SideBar from './sidebar.js';
 import ErrorBoundary from './errorBoundary';
 
+
+
 class App extends Component {
 
   constructor(props) {
@@ -21,11 +23,15 @@ class App extends Component {
   }
 
 
+
 //render map with google api
+
   renderMap = () => {
     loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAGlDDI4IhHVNMooY1WCGtTb6TSGmRnv9Q&callback=initMap")
-    window.initMap = this.initMap
+    window.initMap = this.initMap;
   };
+
+
 
 
 //foursqaure api to get sushi places in Frederick, MD and addresses
@@ -111,6 +117,7 @@ class App extends Component {
         venue: venue,
         // draw the marker since it's not on the map
         marker: this.createMarker(venue)
+//todo:create an animation for markers when they are clicked on the location list marker.setAnimation(window.google.maps.Animation.Bounce);
       });
     })
 
@@ -158,6 +165,7 @@ class App extends Component {
     // locate the marker for the window
     const marker = this.state.markers.find(marker => marker.venue === markVenue);
 
+
     const contentString = `${markVenue.name + `<br>` + markVenue.location.address + `<br>` + `<i>data provided by Foursquare`}`
 
     //content of infowindow
@@ -169,7 +177,7 @@ class App extends Component {
   }
 
 
-getFilteredVenues = () => this.state.venues.filter(venue => this.state.filteredVenueIds.includes(venue.id))
+  getFilteredVenues = () => this.state.venues.filter(venue => this.state.filteredVenueIds.includes(venue.id));
 
 
   render () {
@@ -179,7 +187,7 @@ getFilteredVenues = () => this.state.venues.filter(venue => this.state.filteredV
     } else {
       return (
         <main id="container">
-          <ErrorBoundary>
+        <ErrorBoundary>
           <div id="App" aria-label="App">
             <SideBar venues={venues} filterVenues={this.filterVenues}
              onClickText={this.drawInfoWindow}>
@@ -188,11 +196,15 @@ getFilteredVenues = () => this.state.venues.filter(venue => this.state.filteredV
           <div id="map" aria-label="map" role="application"></div>
           </ErrorBoundary>
         </main>
+
       )
-    }
+    };
   }}
 
   //javascript for google api request
+
+
+
   function loadScript (url) {
     var index =
       window.document.getElementsByTagName("script")[0]
@@ -201,7 +213,15 @@ getFilteredVenues = () => this.state.venues.filter(venue => this.state.filteredV
     script.async = true
     script.defer = true
     index.parentNode.insertBefore(script, index)
+    //window.onerror = googleError
+
+
+
 }
+
+/*googleError = () => {
+      alert(`fetching data from Google was not possible!`)
+    }*/
 
 export default App;
 
