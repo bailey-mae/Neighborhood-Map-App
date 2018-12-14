@@ -69,7 +69,7 @@ Most of the code in this project has been written to the ES6 JavaScript specific
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 ## APIs Used
-[Google Maps API](map API supported by Google)<br></br>
+[Google Maps API](https://developers.google.com/maps/documentation/)<br></br>
 [FourSquare API](https://developer.foursquare.com/)<br></br>
 
 ## Contributing
