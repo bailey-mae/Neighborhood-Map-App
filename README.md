@@ -18,7 +18,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 For the **Neighborhood Map Project** I built a single page application featuring a map of sushi restaurant locations in Frederick, MD, the city where I live. I added functionality to this map; including info windows, custom markers, a side bar list of the restaurants and search filtering of the restaurant list with associated markers filtered by a search. Location names and markers open an infowindow on click. The infowindow provides additional location information. Loaction information is provided by Foursquare API. Map is built with Google Maps API.
 
-##Specification
+## Specification:
 
 The goal of this project was to build a single page map application using React & Google Maps API, plus to integrate a third-party data API, in this case Foursquare, and make the app accessible and usable offline.
 
