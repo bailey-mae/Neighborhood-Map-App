@@ -14,11 +14,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 * [APIs Used](#apis-used)
 * [Contributing](#contributing)
 
-## Project Overview:
+## Project Overview
 
 For the **Neighborhood Map Project** I built a single page application featuring a map of sushi restaurant locations in Frederick, MD, the city where I live. I added functionality to this map; including info windows, custom markers, a side bar list of the restaurants and search filtering of the restaurant list with associated markers filtered by a search. Location names and markers open an infowindow on click. The infowindow provides additional location information. Loaction information is provided by Foursquare API. Map is built with Google Maps API.
 
-## Specification:
+## Specification
 
 The goal of this project was to build a single page map application using React & Google Maps API, plus to integrate a third-party data API, in this case Foursquare, and make the app accessible and usable offline.
 
@@ -68,8 +68,10 @@ Most of the code in this project has been written to the ES6 JavaScript specific
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
+## APIs Used
+[Google Maps API](map API supported by Google)<br></br>
+[FourSquare API](https://developer.foursquare.com/)<br></br>
+
 ## Contributing
 
 This repository was created as an assignment for the Udacity FEND degree and represents coursework, because of this pull requests will most likely not be accepted.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
