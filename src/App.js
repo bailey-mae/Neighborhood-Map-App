@@ -117,7 +117,7 @@ class App extends Component {
         venue: venue,
         // draw the marker since it's not on the map
         marker: this.createMarker(venue)
-//todo:create an animation for markers when they are clicked on the location list marker.setAnimation(window.google.maps.Animation.Bounce);
+
       });
     })
 
@@ -148,7 +148,8 @@ class App extends Component {
     const self = this;
       // click marker event listener
       marker.addListener('click', function() {
-        self.drawInfoWindow(markVenue);
+        self.drawInfoWindow(markVenue)
+
       });
 
     return marker
@@ -165,6 +166,9 @@ class App extends Component {
     // locate the marker for the window
     const marker = this.state.markers.find(marker => marker.venue === markVenue);
 
+    marker.marker.setAnimation(window.google.maps.Animation.BOUNCE);
+    setTimeout(() => {marker.marker.setAnimation(null)}, 500);
+
 
     const contentString = `${markVenue.name + `<br>` + markVenue.location.address + `<br>` + `<i>data provided by Foursquare`}`
 
@@ -174,6 +178,9 @@ class App extends Component {
     infowindow.open(this.map, marker.marker)
     // persist state of drawn marker in component
     this.setState({activeInfoWindow:infowindow});
+
+    //todo:create an animation for markers when they are clicked on the
+    //location list ;
   }
 
 
@@ -186,25 +193,21 @@ class App extends Component {
       return <div id="Error-message" aria-label="Error message">Sorry, something went wrong!</div>
     } else {
       return (
-        <main id="container">
         <ErrorBoundary>
+        <main id="container">
           <div id="App" aria-label="App">
             <SideBar venues={venues} filterVenues={this.filterVenues}
              onClickText={this.drawInfoWindow}>
             </SideBar>
           </div>
           <div id="map" aria-label="map" role="application"></div>
-          </ErrorBoundary>
         </main>
-
+        </ErrorBoundary>
       )
     };
   }}
 
   //javascript for google api request
-
-
-
   function loadScript (url) {
     var index =
       window.document.getElementsByTagName("script")[0]
@@ -212,16 +215,13 @@ class App extends Component {
     script.src = url
     script.async = true
     script.defer = true
+    //error for google map fail
+    script.onerror = function() {
+      alert("Error loading " + this.src); // Error loading https://example.com/404.js
+    };
     index.parentNode.insertBefore(script, index)
-    //window.onerror = googleError
-
-
 
 }
-
-/*googleError = () => {
-      alert(`fetching data from Google was not possible!`)
-    }*/
 
 export default App;
 
