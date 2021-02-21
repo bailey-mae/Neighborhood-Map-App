@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
+//axios = library to help with requests to external resources. Axios is designed to handle http requests and responses. Axios deals with responses using Promises.
+//Axios uses methods like get() and post()
 import axios from 'axios';
+//create mobile sidebar
 import SideBar from './sidebar.js';
+//wrap around a component to handle any errors thrown by it 
 import ErrorBoundary from './errorBoundary';
 
 
